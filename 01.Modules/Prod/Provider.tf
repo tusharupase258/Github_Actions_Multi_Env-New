@@ -11,13 +11,13 @@ terraform {
   }
   backend "azurerm" {
     resource_group_name  = "Tushar_Backend"
-    storage_account_name = "ppipestoragetu46"
+    storage_account_name = "ppipestoragetu491"
     container_name       = "ppipecontainer"
-    key                  = "practiceterraform_20_11.tfstate"
+    key                  = "github_action_infraprod.tfstate"
   }
 }
 
 provider "azurerm" {
   features {}
-  subscription_id = "714f70d8-073b-4880-a373-42e6a72c7539"
+  subscription_id = "8f69ec30-4948-4da8-96ee-6d4c11740858"
 }
