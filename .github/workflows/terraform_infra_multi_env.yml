@@ -22,8 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment || github.ref_name }}
     env:
-      ENVIRONMENT: ${{ github.event.inputs.environment || github.ref_name }}
-      TF_DIR: 01.Modules/${{ github.event.inputs.environment || github.ref_name }}
+      ENVIRONMENT: ${{ github.event.inputs.environment || (github.ref_name == 'main' && 'prod') || github.ref_name }}
+      TF_DIR: 01.Modules/${{ github.event.inputs.environment || (github.ref_name == 'main' && 'prod') || github.ref_name }}
       ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
