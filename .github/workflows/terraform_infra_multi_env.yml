@@ -1,0 +1,49 @@
+name: Terraform Deployment
+
+on:
+  push:
+    branches:
+      - dev
+      - preprod
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Select environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - preprod
+          - prod
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    env:
+      ENVIRONMENT: ${{ github.event.inputs.environment || github.ref_name }}
+      TF_DIR: terraform/envs/${{ github.event.inputs.environment || github.ref_name }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform -chdir=$TF_DIR init
+
+      - name: Terraform Plan
+        run: terraform -chdir=$TF_DIR plan
+
+      - name: Terraform Apply (Auto)
+        if: env.ENVIRONMENT == 'dev' || env.ENVIRONMENT == 'preprod'
+        run: terraform -chdir=$TF_DIR apply -auto-approve
+
+      - name: Terraform Apply (Manual)
+        if: env.ENVIRONMENT == 'main' || env.ENVIRONMENT == 'prod'
+        run: terraform -chdir=$TF_DIR apply -auto-approve
+        environment:
+          name: prod
+          url: https://your-prod-dashboard.com
