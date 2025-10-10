@@ -1,0 +1,67 @@
+name: Terraform Deployment2
+
+on:
+  push:
+    branches:
+      - dev
+      - preprod
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Select environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - preprod
+          - prod
+
+jobs:
+  terraform2:
+    runs-on: ubuntu-latest
+
+    env:
+      # Map main branch to prod
+      BRANCH_NAME: ${{ github.ref_name }}
+      ENVIRONMENT: ${{ github.event.inputs.environment || (github.ref_name == 'main' && 'prod') || github.ref_name }}
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Display Environment
+        run: |
+          echo "Branch Name: $BRANCH_NAME"
+          echo "Environment Selected: $ENVIRONMENT"
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.5
+
+      # Initialize Terraform for the specific environment folder
+      - name: Terraform Init
+        run: terraform -chdir=01.Modules/${{ env.ENVIRONMENT }} init
+
+      # Validate configuration
+      - name: Terraform Validate
+        run: terraform -chdir=01.Modules/${{ env.ENVIRONMENT }} validate
+
+      # Plan infrastructure
+      - name: Terraform Plan
+        run: terraform -chdir=01.Modules/${{ env.ENVIRONMENT }} plan -var-file="terraform.tfvars"
+
+      # Auto apply for dev and preprod
+      - name: Terraform Apply (Auto)
+        if: env.ENVIRONMENT == 'dev' || env.ENVIRONMENT == 'preprod'
+        run: terraform -chdir=01.Modules/${{ env.ENVIRONMENT }} apply -auto-approve -var-file="terraform.tfvars"
+
+      # Manual apply for main/prod
+      - name: Terraform Apply (Manual Approval)
+        if: env.ENVIRONMENT == 'prod'
+        run: terraform -chdir=01.Modules/${{ env.ENVIRONMENT }} apply -auto-approve -var-file="terraform.tfvars"
