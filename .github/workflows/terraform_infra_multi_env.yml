@@ -23,7 +23,8 @@ jobs:
     environment: ${{ github.event.inputs.environment || github.ref_name }}
     env:
       ENVIRONMENT: ${{ github.event.inputs.environment || github.ref_name }}
-      TF_DIR: terraform/envs/${{ github.event.inputs.environment || github.ref_name }}
+      TF_DIR: 01.Modules/${{ github.event.inputs.environment || github.ref_name }}
+
 
     steps:
       - name: Checkout code
