@@ -20,6 +20,7 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || github.ref_name }}
     env:
       ENVIRONMENT: ${{ github.event.inputs.environment || github.ref_name }}
       TF_DIR: terraform/envs/${{ github.event.inputs.environment || github.ref_name }}
@@ -44,6 +45,3 @@ jobs:
       - name: Terraform Apply (Manual)
         if: env.ENVIRONMENT == 'main' || env.ENVIRONMENT == 'prod'
         run: terraform -chdir=$TF_DIR apply -auto-approve
-        environment:
-          name: prod
-          url: https://your-prod-dashboard.com
