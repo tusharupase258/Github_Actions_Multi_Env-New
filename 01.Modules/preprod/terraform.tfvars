@@ -11,11 +11,11 @@ tusharstoragevarsM = {
     location            = "France Central"
     resource_group_name = "tusharRG1_preprod"
   }
-  tusharstorage194p = {
-    name                = "tusharstorage194pp"
-    location            = "France Central"
-    resource_group_name = "tusharRG1_preprod"
-  }
+#   tusharstorage194p = {
+#     name                = "tusharstorage194pp"
+#     location            = "France Central"
+#     resource_group_name = "tusharRG1_preprod"
+#   }
 }
 
 tusharContainervarsM = {
