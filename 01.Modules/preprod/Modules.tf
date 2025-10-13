@@ -2,7 +2,6 @@ module "azurerm_resource_group_module" {
   source       = "../../02.RG_Code"
   tusharRGvars = var.tusharRGvarsM
 }
-#sddg
 
 module "azurerm_storage_account_module" {
   depends_on        = [module.azurerm_resource_group_module]
