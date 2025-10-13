@@ -6,8 +6,8 @@ tusharRGvarsM = {
 }
 
 tusharstoragevarsM = {
-  tusharstorage193p = {
-    name                = "tusharstorage193p"
+  tusharstorage193pp = {
+    name                = "tusharstorage193pp"
     location            = "France Central"
     resource_group_name = "tusharRG1_preprod"
   }
@@ -22,7 +22,7 @@ tusharContainervarsM = {
   tusharcontainer1p = {
     name                 = "tusharcontainer1p"
     storage_account_id   = ""
-    storage_account_name = "tusharstorage193p"
+    storage_account_name = "tusharstorage193pp"
   }
   # tusharcontainer2p = {
   #   name                 = "tusharcontainer2p"
