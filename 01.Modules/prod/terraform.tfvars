@@ -29,7 +29,7 @@ tusharContainervarsM = {
 #     storage_account_id   = ""
 #     storage_account_name = "tusharstorage194p"
 #   }
-# }
+}
 
 tusharvnetvarsM = {
   tusharvnet1_Prod = {
