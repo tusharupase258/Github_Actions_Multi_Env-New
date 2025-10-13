@@ -16,7 +16,7 @@ tusharstoragevarsM = {
 #     location            = "France Central"
 #     resource_group_name = "tusharRG1_Prod"
 #   }
-# }
+}
 
 tusharContainervarsM = {
   tusharcontainer1p = {
