@@ -19,8 +19,8 @@ tusharstoragevarsM = {
 }
 
 tusharContainervarsM = {
-  tusharcontainer1p = {
-    name                 = "tusharcontainer1p"
+  tusharcontainer1pp = {
+    name                 = "tusharcontainer1pp"
     storage_account_id   = ""
     storage_account_name = "tusharstorage193pp"
   }
