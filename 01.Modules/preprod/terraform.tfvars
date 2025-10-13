@@ -298,7 +298,7 @@ tusharvnet_lbvarsM = {
 }
 
 tusharlb_healthprobevarsM = {
- tushar_http_probe_preprod = {
+ tushar_http-probe_preprod = {
     name                = "tushar_http-probe_preprod"
     port                = 80
     lb_name             = "tusharlb1_preprod"
@@ -308,7 +308,7 @@ tusharlb_healthprobevarsM = {
     interval_in_seconds = 10
     loadbalancer_id     = ""
   }
-  tushar_tcp_probe_preprod = {
+  tushar_tcp-probe_preprod = {
     name                = "tushar_tcp-probe_preprod"
     port                = 443
     protocol            = "Tcp"
