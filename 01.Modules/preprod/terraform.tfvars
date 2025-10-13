@@ -11,11 +11,11 @@ tusharstoragevarsM = {
     location            = "France Central"
     resource_group_name = "tusharRG1_preprod"
   }
-  tusharstorage194p = {
-    name                = "tusharstorage194p"
-    location            = "France Central"
-    resource_group_name = "tusharRG1_preprod"
-  }
+  # tusharstorage194p = {
+  #   name                = "tusharstorage194p"
+  #   location            = "France Central"
+  #   resource_group_name = "tusharRG1_preprod"
+  # }
 }
 
 tusharContainervarsM = {
@@ -24,11 +24,11 @@ tusharContainervarsM = {
     storage_account_id   = ""
     storage_account_name = "tusharstorage193p"
   }
-  tusharcontainer2p = {
-    name                 = "tusharcontainer2p"
-    storage_account_id   = ""
-    storage_account_name = "tusharstorage194p"
-  }
+  # tusharcontainer2p = {
+  #   name                 = "tusharcontainer2p"
+  #   storage_account_id   = ""
+  #   storage_account_name = "tusharstorage194p"
+  # }
 }
 
 tusharvnetvarsM = {
@@ -47,12 +47,12 @@ tusharsubnetsvarM = {
     virtual_network_name = "tusharvnet1_preprod"
     address_prefixes     = ["10.1.1.0/24"]
   }
-  tusharsubnet2_preprod = {
-    name                 = "tusharsubnet2_preprod"
-    resource_group_name  = "tusharRG1_preprod"
-    virtual_network_name = "tusharvnet1_preprod"
-    address_prefixes     = ["10.1.2.0/24"]
-  }
+  # tusharsubnet2_preprod = {
+  #   name                 = "tusharsubnet2_preprod"
+  #   resource_group_name  = "tusharRG1_preprod"
+  #   virtual_network_name = "tusharvnet1_preprod"
+  #   address_prefixes     = ["10.1.2.0/24"]
+  # }
   AzureBastionSubnet = {
     name                 = "AzureBastionSubnet"
     resource_group_name  = "tusharRG1_preprod"
@@ -138,18 +138,18 @@ tusharnicvarsM = {
     # public_ip_name                = "tusharpublicip1"
     nsg_name = "tusharnsgallowssh22"
   }
-  tusharnic2_preprod = {
-    name                          = "tusharnic2_preprod"
-    location                      = "France Central"
-    resource_group_name           = "tusharRG1_preprod"
-    ip_configuration_name         = "tusharnic2_preprodip"
-    private_ip_address_allocation = ""
-    # public_ip_address_id          = ""
-    subnet_id   = ""
-    subnet_name = "tusharsubnet2_preprod"
-    # public_ip_name                = "tusharpublicip2"
-    # nsg_name = "tusharnsgallowssh22"
-  }
+  # tusharnic2_preprod = {
+  #   name                          = "tusharnic2_preprod"
+  #   location                      = "France Central"
+  #   resource_group_name           = "tusharRG1_preprod"
+  #   ip_configuration_name         = "tusharnic2_preprodip"
+  #   private_ip_address_allocation = ""
+  #   # public_ip_address_id          = ""
+  #   subnet_id   = ""
+  #   subnet_name = "tusharsubnet2_preprod"
+  #   # public_ip_name                = "tusharpublicip2"
+  #   # nsg_name = "tusharnsgallowssh22"
+  # }
   tusharlinuxvmssnic_preprod = {
     name                          = "tusharlinuxvmssnic_preprod"
     location                      = "France Central"
