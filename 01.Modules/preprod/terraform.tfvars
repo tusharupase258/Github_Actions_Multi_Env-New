@@ -6,7 +6,7 @@ tusharRGvarsM = {
 }
 
 tusharstoragevarsM = {
-  tusharstorage193p = {
+  tusharstorage193pp = {
     name                = "tusharstorage193pp"
     location            = "France Central"
     resource_group_name = "tusharRG1_preprod"
