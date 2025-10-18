@@ -1,0 +1,71 @@
+name: practise
+on:
+  push:
+    branches:
+      -  dev
+      -  main
+      -  preprod
+  workflow_dispatch:
+    inputs:
+      Environment:
+        description: "Select Environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - preprod
+          - prod
+
+jobs:
+  terraform-plan:
+    name: terraform plan
+    runs-on: ubuntu-latest
+
+    env:
+      ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+      ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
+      ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
+      BRANCH_NAME: ${{github.ref_name}}
+      ENVIRONMENT: ${{github.event.inputs.Environment || (github.ref_name == "main" && "prod") || github.ref_name }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v5.0.0
+
+    - name: Display Environment
+      run: |
+        echo "Branch Name: $BRANCH_NAME"
+        echo "Environment: $ENVIRONMENT"
+
+    - name: HashiCorp - Setup Terraform
+      uses: hashicorp/setup-terraform@v3.1.2
+      with:
+        terraform_version: 1.9.5
+
+    - name: terraform init
+      id: init
+      run: terraform init -input=false
+      working-directory: 01.Modules/${{ env.ENVIRONMENT }}
+
+    - name: terraform fmt
+      id: fmt
+      run: terraform fmt
+      working-directory: 01.Modules/${{ env.ENVIRONMENT }}
+
+    - name: terraform validate
+      id: validate
+      run: terraform validate
+      working-directory: 01.Modules/${{env.ENVIRONMENT}}
+
+    - name: terraform plan
+      id: plan
+      run: terraform plan -out=tfplan.binary -var-file="terraform.tfvars"
+      working-directory: 01.Modules/${{env.ENVIRONMENT}}
+
+    - name: Upload a plan Artifact
+      uses: actions/upload-artifact@v4.6.2
+      with: 
+        name: tfpan
+        path: |
+          01.Modules/${{ env.ENVIRONMENT }}/tfplan.binary
+          01.Modules/${{ env.ENVIRONMENT }}/.terraform.lock.hcl
