@@ -60,7 +60,7 @@ jobs:
 
     - name: terraform plan
       id: plan
-      run: terraform plan -out=tfplan.binary -var-file = "terraform.tfvars"
+      run: terraform plan -out=tfplan.binary -var-file="terraform.tfvars"
       working-directory: 01.Modules/${{env.ENVIRONMENT}}
 
     - name: Upload a plan Artifact
