@@ -85,16 +85,19 @@ jobs:
       ENVIRONMENT: ${{github.event.inputs.Environment || (github.ref_name == 'main' && 'prod') || github.ref_name }}
 
     steps: 
-    - name: HashiCorp - Setup Terraform
-      uses: hashicorp/setup-terraform@v3.1.2
-      with:
-        terraform_version: 1.9.5
+    - name: Checkout Repository
+      uses: actions/checkout@v4
         
     - name: Download plan Artifact
       uses: actions/download-artifact@v5.0.0
       with:
-        name: tfpan
-        path: 01.Modules/${{ env.ENVIRONMENT }}
+         name: tfpan
+         path: 01.Modules/${{ env.ENVIRONMENT }}
+
+    - name: HashiCorp - Setup Terraform
+      uses: hashicorp/setup-terraform@v3.1.2
+      with:
+        terraform_version: 1.9.5
         
     - name: terraform init
       id: Re-init
